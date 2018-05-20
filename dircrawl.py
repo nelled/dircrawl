@@ -14,7 +14,7 @@ if __name__ == '__main__':
     ap.set_defaults(threads=10)
 
     args = vars(ap.parse_args())
-    url = prepare_url(args['url'])
+    url = args['url']
     word_list = read_word_list(args['words'])
 
     url_gen = UrlGenerator(url, word_list)
