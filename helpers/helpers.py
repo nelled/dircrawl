@@ -13,3 +13,6 @@ def read_word_list(word_list_path):
             if not l.startswith('#'):
                 result.append(l)
     return result
+
+def get_url_len(baseurl, url):
+    return len(url.strip(baseurl).split('/'))

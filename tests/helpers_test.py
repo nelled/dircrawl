@@ -1,6 +1,6 @@
 import unittest
 
-from helpers.helpers import prepare_url, read_word_list
+from helpers.helpers import prepare_url, read_word_list, get_url_len
 
 
 class HelpersTest(unittest.TestCase):
@@ -17,3 +17,8 @@ class HelpersTest(unittest.TestCase):
         self.assertEqual(2, len(words))
         self.assertTrue(test_str_a in words)
         self.assertTrue(test_str_b in words)
+
+    def test_get_url_len(self):
+        baseurl = 'http://localhost/dvwa/'
+        url = 'http://localhost/dvwa/docs'
+        self.assertEqual(1, get_url_len(baseurl, url))

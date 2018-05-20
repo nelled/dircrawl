@@ -3,15 +3,15 @@ import urllib.request
 import urllib.error
 
 
-class UrlRequest(threading.Thread):
+class UrlRequest:
     INTERESTING_HTTP_CODES =[200]
 
     def __init__(self, url):
-        threading.Thread.__init__(self)
         self.url = url
         self.__http_code = None
+        self.is_interesting=False
 
-    def run(self):
+    def do_request(self):
         try:
             with urllib.request.urlopen(self.url) as response:
                 self.__http_code = response.getcode()
@@ -21,7 +21,8 @@ class UrlRequest(threading.Thread):
             pass
         finally:
             if self.__http_code in self.INTERESTING_HTTP_CODES:
-                print(self.response)
+                self.is_interesting = True
+                #print(self.response)
 
 
     @property
