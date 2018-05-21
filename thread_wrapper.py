@@ -13,11 +13,13 @@ class ThreadWrapper(threading.Thread):
         while True:
             current_request = self.q.get()
             current_request.do_request()
-            if current_request.is_interesting and \
-                    current_request.url != self.manager.base_url and \
-                    get_url_len(self.manager.base_url, current_request.url) <= self.manager.depth:
-                print("Adding to queue\n")
-                print(current_request.url)
-                self.manager.add_to_queue(current_request.url)
+            print(current_request)
+            if current_request.is_interesting:
+                self.manager.results.append(current_request)
+
+                if current_request.url != self.manager.base_url and \
+                        get_url_len(self.manager.base_url, current_request.url) <= self.manager.depth and \
+                        not current_request.is_file:
+                    self.manager.add_to_queue(current_request.url)
+
             self.q.task_done()
-            #print(self.q.qsize())

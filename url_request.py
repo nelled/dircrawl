@@ -2,14 +2,19 @@ import threading
 import urllib.request
 import urllib.error
 
+import config
+
 
 class UrlRequest:
-    INTERESTING_HTTP_CODES =[200]
 
     def __init__(self, url):
         self.url = url
+        self.interesting_http_codes = config.INTERESTING_HTTP_CODES
+        self.extensions = config.EXTENSIONS
         self.__http_code = None
-        self.is_interesting=False
+        self.is_interesting = False
+        self.is_file = False
+        self.__is_file()
 
     def do_request(self):
         try:
@@ -20,10 +25,15 @@ class UrlRequest:
         except urllib.error.URLError as e:
             pass
         finally:
-            if self.__http_code in self.INTERESTING_HTTP_CODES:
+            if self.__http_code in self.interesting_http_codes:
                 self.is_interesting = True
-                #print(self.response)
 
+    def __is_file(self):
+        if self.url.endswith(tuple(self.extensions)):
+            self.is_file = True
+
+    def __str__(self):
+        return self.url + '\t\t\t' + str(self.http_code)
 
     @property
     def response(self):
