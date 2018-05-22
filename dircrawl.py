@@ -1,16 +1,7 @@
 import argparse
-from queue import Queue
-
-from urllib.parse import urlparse
-
 from tabulate import tabulate
-
 from brute_force_generator import BruteForceGenerator
 from dircrawl_manager import DircrawlManager
-from helpers.helpers import prepare_url, read_word_list
-from thread_wrapper import ThreadWrapper
-from url_generator import UrlGenerator
-from url_request import UrlRequest
 from word_list import WordList
 
 if __name__ == '__main__':
@@ -19,7 +10,7 @@ if __name__ == '__main__':
     ap.add_argument('-words', required=False, help="Path to input file.")
     ap.add_argument('-threads', required=False, type=int, help="Number of threads")
     ap.add_argument('-depth', required=False, type=int, help="How deep should we descend into the structure")
-    ap.add_argument('-bruteforce', dest = 'bruteforce', action='store_true', help="Do you want to use bruteforce?")
+    ap.add_argument('-bruteforce', dest='bruteforce', action='store_true', help="Do you want to use bruteforce?")
     ap.set_defaults(threads=20, depth=2, bruteforce=False)
 
     args = vars(ap.parse_args())
@@ -35,4 +26,3 @@ if __name__ == '__main__':
     dircrawl_manager.run()
     list_for_tabulate = [[request.url, request.http_code] for request in dircrawl_manager.results]
     print(tabulate(list_for_tabulate, headers=['URL', 'HTTP CODE'], tablefmt='grid'))
-

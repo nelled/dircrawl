@@ -1,5 +1,4 @@
 import threading
-
 from helpers.helpers import get_url_len
 
 
