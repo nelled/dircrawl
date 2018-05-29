@@ -1,4 +1,5 @@
 import threading
+
 from helpers.helpers import get_url_len
 
 
@@ -20,5 +21,4 @@ class ThreadWrapper(threading.Thread):
                         get_url_len(self.manager.base_url, current_request.url) <= self.manager.depth and \
                         not current_request.is_file:
                     self.manager.add_to_queue(current_request.url)
-
             self.q.task_done()

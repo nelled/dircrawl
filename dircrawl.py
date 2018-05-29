@@ -8,8 +8,8 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('-url', required=True, help="Site to examine.")
     ap.add_argument('-words', required=False, help="Path to input file.")
-    ap.add_argument('-threads', required=False, type=int, help="Number of threads")
-    ap.add_argument('-depth', required=False, type=int, help="How deep should we descend into the structure")
+    ap.add_argument('-threads', required=False, type=int, help="Number of threads.")
+    ap.add_argument('-depth', required=False, type=int, help="How deep should we descend into the structure.")
     ap.add_argument('-bruteforce', dest='bruteforce', action='store_true', help="Do you want to use bruteforce?")
     ap.set_defaults(threads=20, depth=2, bruteforce=False)
 

@@ -30,6 +30,7 @@ class DircrawlManager:
         for url in url_gen.generate_file_names():
             self.queue.put(UrlRequest(url))
 
+
     def run(self):
         for i in range(self.threads):
             t = ThreadWrapper(self.queue, self)
