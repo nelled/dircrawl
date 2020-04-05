@@ -9,7 +9,6 @@ title: |
     Software Security summer term 2018
 ---
 
-\maketitle
 Description
 ===========
 
